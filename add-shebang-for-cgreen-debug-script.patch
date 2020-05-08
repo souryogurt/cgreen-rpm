@@ -1,0 +1,9 @@
+diff --git tools/cgreen-debug tools/cgreen-debug
+index 189c24d..d41253e 100755
+--- tools/cgreen-debug
++++ tools/cgreen-debug
+@@ -1,3 +1,4 @@
++#!/usr/bin/bash
+ # cgreen-debug
+ #
+ # Script to start cgreen-runner under gdb, load a library and break

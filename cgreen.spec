@@ -1,12 +1,14 @@
-%global gittag 1.2.0
 Name:           cgreen
 Version:        1.2.0
 Release:        1%{?dist}
 Summary:        Modern unit test and mocking framework for C and C++
-
 License:        ISC
 URL:            https://github.com/cgreen-devs/%{name}
-Source0:        https://github.com/cgreen-devs/%{name}/archive/%{gittag}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/cgreen-devs/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+# https://github.com/cgreen-devs/cgreen/issues/217
+Patch0:         use-variable-for-package-config-installation-path.patch
+# https://github.com/cgreen-devs/cgreen/issues/218
+Patch1:         add-shebang-for-cgreen-debug-script.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
@@ -16,29 +18,41 @@ BuildRequires:  gcc-c++
 A modern, portable, cross-language unit testing and mocking framework for C
 and C++.
 
-%prep
-%autosetup -n %{name}-%{gittag}
 
+%package devel
+Summary:        Libraries and headers for developing programs with Cgreen
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+%description devel
+Libraries and headers for developing programs with Cgreen.
+
+
+%package runner
+Summary:        A runner for the Cgreen unit testing and mocking framework
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+%description runner
+A runner for the Cgreen unit testing and mocking framework.
+
+
+%prep
+%autosetup -p0
 
 %build
 %cmake .
 %make_build
 
-
 %install
-# Don't put things into /usr/lib/cmake on 64-bit systems
-%if "%{?_lib}" == "lib64"
-    sed -i -e "s@/lib/cmake/cgreen@/lib64/cmake/cgreen@g" cmake_install.cmake
-%endif
 %make_install
-
 
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/cgreen-debug
-%{_bindir}/cgreen-runner
-%dir %{_includedir}/cgreen
+%{_libdir}/libcgreen.so.1*
+
+
+%files devel
+%{_libdir}/libcgreen.so
 %{_includedir}/cgreen/assertions.h
 %{_includedir}/cgreen/boxed_double.h
 %{_includedir}/cgreen/breadcrumb.h
@@ -71,14 +85,13 @@ and C++.
 %{_includedir}/cgreen/text_reporter.h
 %{_includedir}/cgreen/unit.h
 %{_includedir}/cgreen/vector.h
-
-%{_libdir}/libcgreen.so
-%{_libdir}/libcgreen.so.1
-%{_libdir}/libcgreen.so.1.2.0
-
-%dir %{_libdir}/cmake/cgreen
 %{_libdir}/cmake/cgreen/cgreen-config-version.cmake
 %{_libdir}/cmake/cgreen/cgreen-config.cmake
+
+
+%files runner
+%{_bindir}/cgreen-debug
+%{_bindir}/cgreen-runner
 %{_mandir}/man1/cgreen-runner.1*
 %{_mandir}/man5/cgreen.5*
 
