@@ -9,6 +9,9 @@ Source0:        https://github.com/cgreen-devs/%{name}/archive/%{version}/%{name
 Patch0:         use-variable-for-package-config-installation-path.patch
 # https://github.com/cgreen-devs/cgreen/issues/218
 Patch1:         add-shebang-for-cgreen-debug-script.patch
+# https://github.com/cgreen-devs/cgreen/issues/218
+Patch2:         add-cgreen-debug-man-file.patch
+
 
 BuildRequires:  cmake
 BuildRequires:  gcc
@@ -93,6 +96,7 @@ A runner for the Cgreen unit testing and mocking framework.
 %{_bindir}/cgreen-debug
 %{_bindir}/cgreen-runner
 %{_mandir}/man1/cgreen-runner.1*
+%{_mandir}/man1/cgreen-debug.1*
 %{_mandir}/man5/cgreen.5*
 
 
