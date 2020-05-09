@@ -9,13 +9,14 @@ Source0:        https://github.com/cgreen-devs/%{name}/archive/%{version}/%{name
 Patch0:         use-variable-for-package-config-installation-path.patch
 # https://github.com/cgreen-devs/cgreen/issues/218
 Patch1:         add-shebang-for-cgreen-debug-script.patch
-# https://github.com/cgreen-devs/cgreen/issues/218
+# https://github.com/cgreen-devs/cgreen/issues/219
 Patch2:         add-cgreen-debug-man-file.patch
 
 
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
+BuildRequires:  asciidoctor
 
 %description
 A modern, portable, cross-language unit testing and mocking framework for C
@@ -42,7 +43,7 @@ A runner for the Cgreen unit testing and mocking framework.
 %autosetup -p0
 
 %build
-%cmake .
+%cmake -DCGREEN_WITH_HTML_DOCS=ON .
 %make_build
 
 %install
@@ -55,6 +56,7 @@ A runner for the Cgreen unit testing and mocking framework.
 
 
 %files devel
+%doc doc/cgreen-guide-en-docinfo.html
 %{_libdir}/libcgreen.so
 %{_includedir}/cgreen/assertions.h
 %{_includedir}/cgreen/boxed_double.h

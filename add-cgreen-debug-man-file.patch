@@ -1,6 +1,8 @@
-diff -ur --new-file doc/man/man1/cgreen-debug.1 ../../souryogurt/cgreen/doc/man/man1/cgreen-debug.1
---- doc/man/man1/cgreen-debug.1	1970-01-01 03:00:00.000000000 +0300
-+++ ../../souryogurt/cgreen/doc/man/man1/cgreen-debug.1	2020-05-09 05:59:48.736971082 +0300
+diff --git doc/man/man1/cgreen-debug.1 doc/man/man1/cgreen-debug.1
+new file mode 100644
+index 0000000..6594d25
+--- /dev/null
++++ doc/man/man1/cgreen-debug.1
 @@ -0,0 +1,30 @@
 +.TH CGREEN-DEBUG "1" "May 2020" "cgreen 1.2.0" "User Commands"
 +.SH NAME
