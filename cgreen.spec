@@ -58,6 +58,8 @@ A runner for the Cgreen unit testing and mocking framework.
 %files devel
 %doc doc/cgreen-guide-en-docinfo.html
 %{_libdir}/libcgreen.so
+%dir %{_includedir}/cgreen
+%dir %{_includedir}/cgreen/internal
 %{_includedir}/cgreen/assertions.h
 %{_includedir}/cgreen/boxed_double.h
 %{_includedir}/cgreen/breadcrumb.h
@@ -90,6 +92,7 @@ A runner for the Cgreen unit testing and mocking framework.
 %{_includedir}/cgreen/text_reporter.h
 %{_includedir}/cgreen/unit.h
 %{_includedir}/cgreen/vector.h
+%dir %{_libdir}/cmake/cgreen
 %{_libdir}/cmake/cgreen/cgreen-config-version.cmake
 %{_libdir}/cmake/cgreen/cgreen-config.cmake
 
