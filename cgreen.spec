@@ -5,6 +5,22 @@ Summary:        Modern unit test and mocking framework for C and C++
 License:        ISC
 URL:            https://github.com/cgreen-devs/%{name}
 Source0:        https://github.com/cgreen-devs/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+# Package tests are checking the format of error messages but assume that
+# values used in these messages are platform-independent. That leads the test
+# to fail.
+ExcludeArch:    s390x
+# Package tests are checking the format of error messages but assume that
+# values used in these messages are platform-independent. That leads the test
+# to fail.
+ExcludeArch:    ppc64le
+# Package tests are checking the format of error messages but assume that
+# values used in these messages are platform-independent. That leads the test
+# to fail.
+ExcludeArch:    aarch64
+# Package tests are checking the format of error messages but assume that
+# values used in these messages are platform-independent. That leads the test
+# to fail.
+ExcludeArch:    armv7hl
 # https://github.com/cgreen-devs/cgreen/issues/218
 Patch0:         use-variable-for-package-config-installation-path.patch
 # https://github.com/cgreen-devs/cgreen/issues/212
