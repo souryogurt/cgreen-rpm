@@ -11,11 +11,12 @@ Patch0:         use-variable-for-package-config-installation-path.patch
 Patch1:         add-shebang-for-cgreen-debug-script.patch
 # https://github.com/cgreen-devs/cgreen/issues/219
 Patch2:         add-cgreen-debug-man-file.patch
-
+# https://github.com/cgreen-devs/cgreen/pull/211
+Patch3:         fix-double-free-in-tcache2-error.patch
 
 BuildRequires:  cmake
-BuildRequires:  gcc
 BuildRequires:  gcc-c++
+BuildRequires:  perl-interpreter
 BuildRequires:  asciidoctor
 
 %description
@@ -48,6 +49,9 @@ A runner for the Cgreen unit testing and mocking framework.
 
 %install
 %make_install
+
+%check
+ctest -V %{?_smp_mflags}
 
 %files
 %license LICENSE
