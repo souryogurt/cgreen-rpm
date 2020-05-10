@@ -5,11 +5,11 @@ Summary:        Modern unit test and mocking framework for C and C++
 License:        ISC
 URL:            https://github.com/cgreen-devs/%{name}
 Source0:        https://github.com/cgreen-devs/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-# https://github.com/cgreen-devs/cgreen/issues/217
-Patch0:         use-variable-for-package-config-installation-path.patch
 # https://github.com/cgreen-devs/cgreen/issues/218
+Patch0:         use-variable-for-package-config-installation-path.patch
+# https://github.com/cgreen-devs/cgreen/issues/212
 Patch1:         add-shebang-for-cgreen-debug-script.patch
-# https://github.com/cgreen-devs/cgreen/issues/219
+# https://github.com/cgreen-devs/cgreen/issues/221
 Patch2:         add-cgreen-debug-man-file.patch
 # https://github.com/cgreen-devs/cgreen/pull/211
 Patch3:         fix-double-free-in-tcache2-error.patch
