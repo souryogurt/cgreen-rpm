@@ -13,14 +13,7 @@ ExcludeArch:    s390x
 # values used in these messages are platform-independent. That leads the test
 # to fail.
 ExcludeArch:    ppc64le
-# Package tests are checking the format of error messages but assume that
-# values used in these messages are platform-independent. That leads the test
-# to fail.
-ExcludeArch:    aarch64
-# Package tests are checking the format of error messages but assume that
-# values used in these messages are platform-independent. That leads the test
-# to fail.
-ExcludeArch:    armv7hl
+
 # https://github.com/cgreen-devs/cgreen/issues/218
 Patch0:         use-variable-for-package-config-installation-path.patch
 # https://github.com/cgreen-devs/cgreen/issues/212
@@ -29,6 +22,8 @@ Patch1:         add-shebang-for-cgreen-debug-script.patch
 Patch2:         add-cgreen-debug-man-file.patch
 # https://github.com/cgreen-devs/cgreen/pull/211
 Patch3:         fix-double-free-in-tcache2-error.patch
+# https://github.com/cgreen-devs/cgreen/issues/223
+Patch4:         use-signed-char-in-test.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
