@@ -23,7 +23,7 @@ Patch2:         add-cgreen-debug-man-file.patch
 # https://github.com/cgreen-devs/cgreen/pull/211
 Patch3:         fix-double-free-in-tcache2-error.patch
 # https://github.com/cgreen-devs/cgreen/issues/223
-Patch4:         use-signed-char-in-test.patch
+Patch4:         fix-is-equal-to-hex-test.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
