@@ -1,29 +1,10 @@
 Name:           cgreen
-Version:        1.2.0
+Version:        1.3.0
 Release:        1%{?dist}
 Summary:        Modern unit test and mocking framework for C and C++
 License:        ISC
 URL:            https://github.com/cgreen-devs/%{name}
 Source0:        https://github.com/cgreen-devs/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-# Package tests are checking the format of error messages but assume that
-# values used in these messages are platform-independent. That leads the test
-# to fail.
-ExcludeArch:    s390x
-# Package tests are checking the format of error messages but assume that
-# values used in these messages are platform-independent. That leads the test
-# to fail.
-ExcludeArch:    ppc64le
-
-# https://github.com/cgreen-devs/cgreen/issues/218
-Patch0:         use-variable-for-package-config-installation-path.patch
-# https://github.com/cgreen-devs/cgreen/issues/212
-Patch1:         add-shebang-for-cgreen-debug-script.patch
-# https://github.com/cgreen-devs/cgreen/issues/221
-Patch2:         add-cgreen-debug-man-file.patch
-# https://github.com/cgreen-devs/cgreen/pull/211
-Patch3:         fix-double-free-in-tcache2-error.patch
-# https://github.com/cgreen-devs/cgreen/issues/223
-Patch4:         fix-is-equal-to-hex-test.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -52,7 +33,7 @@ A runner for the Cgreen unit testing and mocking framework.
 
 
 %prep
-%autosetup -p0
+%autosetup
 
 %build
 %cmake -DCGREEN_WITH_HTML_DOCS=ON .
@@ -62,7 +43,12 @@ A runner for the Cgreen unit testing and mocking framework.
 %make_install
 
 %check
+# https://github.com/cgreen-devs/cgreen/issues/226
+# https://github.com/cgreen-devs/cgreen/issues/227
+# https://github.com/cgreen-devs/cgreen/issues/239
+%ifnarch s390x ppc64le
 ctest -V %{?_smp_mflags}
+%endif
 
 %files
 %license LICENSE
@@ -73,43 +59,8 @@ ctest -V %{?_smp_mflags}
 %files devel
 %doc doc/cgreen-guide-en-docinfo.html
 %{_libdir}/libcgreen.so
-%dir %{_includedir}/cgreen
-%dir %{_includedir}/cgreen/internal
-%{_includedir}/cgreen/assertions.h
-%{_includedir}/cgreen/boxed_double.h
-%{_includedir}/cgreen/breadcrumb.h
-%{_includedir}/cgreen/cdash_reporter.h
-%{_includedir}/cgreen/cgreen.h
-%{_includedir}/cgreen/cgreen_value.h
-%{_includedir}/cgreen/constraint.h
-%{_includedir}/cgreen/constraint_syntax_helpers.h
-%{_includedir}/cgreen/cpp_assertions.h
-%{_includedir}/cgreen/cpp_constraint.h
-%{_includedir}/cgreen/cute_reporter.h
-%{_includedir}/cgreen/internal/assertions_internal.h
-%{_includedir}/cgreen/internal/c_assertions.h
-%{_includedir}/cgreen/internal/cgreen_pipe.h
-%{_includedir}/cgreen/internal/cgreen_time.h
-%{_includedir}/cgreen/internal/cpp_assertions.h
-%{_includedir}/cgreen/internal/function_macro.h
-%{_includedir}/cgreen/internal/mocks_internal.h
-%{_includedir}/cgreen/internal/mock_table.h
-%{_includedir}/cgreen/internal/runner_platform.h
-%{_includedir}/cgreen/internal/stringify_token.h
-%{_includedir}/cgreen/internal/suite_internal.h
-%{_includedir}/cgreen/internal/unit_implementation.h
-%{_includedir}/cgreen/legacy.h
-%{_includedir}/cgreen/mocks.h
-%{_includedir}/cgreen/reporter.h
-%{_includedir}/cgreen/runner.h
-%{_includedir}/cgreen/string_comparison.h
-%{_includedir}/cgreen/suite.h
-%{_includedir}/cgreen/text_reporter.h
-%{_includedir}/cgreen/unit.h
-%{_includedir}/cgreen/vector.h
-%dir %{_libdir}/cmake/cgreen
-%{_libdir}/cmake/cgreen/cgreen-config-version.cmake
-%{_libdir}/cmake/cgreen/cgreen-config.cmake
+%{_includedir}/cgreen
+%{_libdir}/cmake/cgreen
 
 
 %files runner
@@ -121,5 +72,8 @@ ctest -V %{?_smp_mflags}
 
 
 %changelog
+* Fri Jul 17 2020 Egor Artemov <egor.artemov@gmail.com> - 1.3.0-1
+- Bump to 1.3.0 version
+
 * Thu May 7 2020 Egor Artemov <egor.artemov@gmail.com> - 1.2.0-1
 - Build of 1.2.0 release
