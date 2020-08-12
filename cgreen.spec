@@ -37,17 +37,17 @@ A runner for the Cgreen unit testing and mocking framework.
 
 %build
 %cmake -DCGREEN_WITH_HTML_DOCS=ON .
-%make_build
+%cmake_build
 
 %install
-%make_install
+%cmake_install
 
 %check
 # https://github.com/cgreen-devs/cgreen/issues/226
 # https://github.com/cgreen-devs/cgreen/issues/227
 # https://github.com/cgreen-devs/cgreen/issues/239
 %ifnarch s390x ppc64le
-ctest -V %{?_smp_mflags}
+%ctest
 %endif
 
 %files
