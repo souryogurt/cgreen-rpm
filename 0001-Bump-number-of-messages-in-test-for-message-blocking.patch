@@ -1,0 +1,26 @@
+From c6efe6b5eb5151a16deb377a33f67fb690df55d8 Mon Sep 17 00:00:00 2001
+From: Thomas Nilefalk <thomas.nilefalk@responsive.se>
+Date: Wed, 12 Aug 2020 08:14:40 +0200
+Subject: [PATCH 1/2] Bump number of messages in test for message blocking to
+ force some architectures to throw exception
+
+---
+ tests/messaging_tests.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/messaging_tests.c b/tests/messaging_tests.c
+index 52b3b15..2988bf3 100644
+--- a/tests/messaging_tests.c
++++ b/tests/messaging_tests.c
+@@ -41,7 +41,7 @@ static void catch_signal(int s) {
+ }
+ 
+ Ensure(failure_reported_and_exception_thrown_when_messaging_would_block) {
+-    const int LOOPS = 65536;
++    const int LOOPS = 65537;
+     int messaging = start_cgreen_messaging(33);
+     int loop;
+     char panic_message[1000];
+-- 
+2.28.0
+

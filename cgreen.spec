@@ -6,6 +6,12 @@ License:        ISC
 URL:            https://github.com/cgreen-devs/%{name}
 Source0:        https://github.com/cgreen-devs/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 
+# https://github.com/cgreen-devs/cgreen/issues/239
+Patch0:         0001-Bump-number-of-messages-in-test-for-message-blocking.patch
+# https://github.com/cgreen-devs/cgreen/issues/226
+# https://github.com/cgreen-devs/cgreen/issues/227
+Patch1:         0002-fix-unittest-issue-on-arch-s390x.patch
+
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  perl-interpreter
@@ -33,7 +39,7 @@ A runner for the Cgreen unit testing and mocking framework.
 
 
 %prep
-%autosetup
+%autosetup -p1
 
 %build
 %cmake -DCGREEN_WITH_HTML_DOCS=ON .
@@ -43,12 +49,7 @@ A runner for the Cgreen unit testing and mocking framework.
 %cmake_install
 
 %check
-# https://github.com/cgreen-devs/cgreen/issues/226
-# https://github.com/cgreen-devs/cgreen/issues/227
-# https://github.com/cgreen-devs/cgreen/issues/239
-%ifnarch s390x ppc64le
 %ctest
-%endif
 
 %files
 %license LICENSE
@@ -72,6 +73,11 @@ A runner for the Cgreen unit testing and mocking framework.
 
 
 %changelog
+* Sun Nov 15 2020 Egor Artemov egor.Artemov@gmail.com - 1.3.0-1
+- Upstream fixed bugs that do not allow to run tests on s390x and pple64
+  architectures. Backporting patches from master and enabling tests on s390x
+  and pple64.
+
 * Fri Jul 17 2020 Egor Artemov <egor.artemov@gmail.com> - 1.3.0-1
 - Bump to 1.3.0 version
 
